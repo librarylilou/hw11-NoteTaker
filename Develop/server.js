@@ -35,7 +35,22 @@ const displayIndex = (res) => {
     res.end(indexHTML);
 };
 
-// handle request
+//display error message
+const display404 = (url, res) => {
+    const errorHTML = `
+    <html>
+      <body>
+        <h1>404 Not Found </h1>
+        <p>The page you were looking for: ${url} can not be found</p>
+      </body>
+    </html>`;
+    
+    res.writeHead(404, { 'Content-Type': 'text/html' });
+
+  res.end(errorHTML);
+};
+
+// handle request(s)
 const handleRequest = (req, res) => {
 
     const path = req.url;
@@ -44,7 +59,11 @@ const handleRequest = (req, res) => {
         case '/':
             return displayIndex(res);
             break;
-    };
+            
+        default:
+            return display404(path, res);
+            break;
+    }
 };
 
 // create server
