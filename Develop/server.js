@@ -1,6 +1,10 @@
 const http = require('http');
 const PORT = process.env.PORT || 8080;
 
+const express = require('express');
+const app = express(); 
+app.use(express.static('client'));
+
 const displayIndex = (res) => {
     const indexHTML = `
 <html>
@@ -72,3 +76,4 @@ server.listen(PORT, () => {
 
     console.log(`Server listening on: http://localhost:${PORT}`);
 });
+
